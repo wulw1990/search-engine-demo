@@ -3,7 +3,7 @@ pip install flask scrapy beautifulsoup4
 
 
 cd <project-path>/mySpider
-sh run.sh
+scrapy crawl itcast -o data.csv
 
 cd <project-path>/flask
 python search.py
