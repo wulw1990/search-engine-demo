@@ -47,13 +47,19 @@ def search():
     # debug
     # result = [['http://www.baidu.com', 'baidu'], ['http://www.sohu.com', 'sohu']]
 
-    csv_rows = load_csv_file('../mySpider/demo.csv')
-    csv_rows = sorted(csv_rows, key=lambda x: x[1][keyword], reverse=True)
-    if len(csv_rows) > 5:
-        csv_rows = csv_rows[0:5]
+    csv_rows = load_csv_file('../mySpider/data-reverse.csv')
+    reverse_map = {}
     for row in csv_rows:
-        url = row[0]
-        name = row[0]
+        reverse_map[row[0]] = row[1]
+    freq_dict = reverse_map[keyword]
+    print(freq_dict)
+    pair_list = sorted(freq_dict.items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
+    print(freq_dict)
+    if len(pair_list) > 5:
+        pair_list = pair_list[0:5]
+    for pair in pair_list:
+        url = pair[0]
+        name = pair[0]
         result.append([url, name])
 
     return render_template('search.html', titles=result)
